@@ -8,8 +8,8 @@ import { Weather } from '../models/weather';
   providedIn: 'root',
 })
 export class WeatherService {
-  apiUrl = environment.apiURL;
-  apiKey = environment.apiKey;
+  private apiUrl = environment.apiURL;
+  private apiKey = environment.apiKey;
 
   constructor(private http: HttpClient) {}
 
