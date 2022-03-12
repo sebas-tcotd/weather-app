@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "weather-app-c4a3c": {
+      "hosting": {
+        "weather-app": [
+          "weather-app-c4a3c"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "weather-app-c4a3c"
+  }
+}
