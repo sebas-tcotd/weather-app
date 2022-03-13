@@ -1,0 +1,12 @@
+// BREAKPOINTS
+$_bp-mobile: 360px;
+$_bp-tablet: 768px;
+$_bp-desktop: 1024px;
+$_bp-desktop-large: 1440px;
+
+$breakpoints: (
+  mobile: $_bp-mobile,
+  tablet: $_bp-tablet,
+  desktop: $_bp-desktop,
+  large-desktop: $_bp-desktop-large,
+);

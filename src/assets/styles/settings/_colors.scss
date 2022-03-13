@@ -1,0 +1,21 @@
+@use "sass:color";
+
+/// Primitives variables
+$_lotion: #fafafa;
+$_antiflash-white: #edf2f4;
+$_charcoal: #30464f;
+
+/// Semantic variables
+$text-color: $_lotion;
+$text-color-informative: color.scale($_lotion, $alpha: -25%);
+$text-color-mid: color.scale($_lotion, $alpha: -50%);
+$text-color-desactivated: color.scale($_lotion, $alpha: -75%);
+
+$background-default: $_charcoal;
+$background-transparent: color.scale($_antiflash-white, $alpha: -80%);
+
+$border-color: color.scale($_lotion, $alpha: -75%);
+
+$input-background-color: color.scale($_charcoal, $alpha: -80%);
+
+$shadow-color: $_charcoal;

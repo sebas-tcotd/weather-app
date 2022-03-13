@@ -1,0 +1,26 @@
+@use "sass:map";
+@use "../settings/settings";
+
+@mixin media-phone {
+  @media only screen and (min-width: map.get(settings.$breakpoints, mobile)) {
+    @content;
+  }
+}
+
+@mixin media-tablet {
+  @media only screen and (min-width: map.get(settings.$breakpoints, tablet )) {
+    @content;
+  }
+}
+
+@mixin media-desktop {
+  @media only screen and (min-width: map.get(settings.$breakpoints, desktop)) {
+    @content;
+  }
+}
+
+@mixin media-desktop-lg {
+  @media only screen and (min-width: map.get(settings.$breakpoints, large-desktop)) {
+    @content;
+  }
+}

@@ -1,0 +1,25 @@
+@use "../settings/settings";
+
+h1 {
+  font-size: settings.$fs-h1;
+}
+
+h2 {
+  font-size: settings.$fs-h2;
+}
+
+h3 {
+  font-size: settings.$fs-h3;
+}
+
+h4 {
+  font-size: settings.$fs-h4;
+}
+
+h5 {
+  font-size: settings.$fs-h5;
+}
+
+h6 {
+  font-size: settings.$fs-h6;
+}

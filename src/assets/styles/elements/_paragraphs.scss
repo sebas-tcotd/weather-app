@@ -1,0 +1,5 @@
+@use "../settings/settings";
+
+p {
+  font-size: settings.$fs-paragraph;
+}
