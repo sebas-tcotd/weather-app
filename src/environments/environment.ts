@@ -3,7 +3,9 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  apiURL: process.env.NG_APP_WEATHER_API_URL,
+  apiKey: process.env.NG_APP_WEATHER_API_KEY,
 };
 
 /*
