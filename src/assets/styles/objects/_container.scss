@@ -1,0 +1,15 @@
+@use "../settings/sizing";
+@use "../tools/responsives";
+
+/*------------------------------------*\
+  #CONTAINER
+\*------------------------------------*/
+
+.o-container {
+  margin: 0 auto;
+  width: calc(100% - (sizing.$size-24 * 2));
+
+  @include responsives.media-desktop {
+    width: calc(100% - (sizing.$size-32 * 2));
+  }
+}

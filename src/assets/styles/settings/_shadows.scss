@@ -1,4 +1,4 @@
-@use "sass:colors";
+@use "sass:color";
 @use "./colors" as c;
 
-$box-shadow: -4px 0px 48px 0px colors.scale(c.$shadow-color, $alpha: -75%);
+$box-shadow: -4px 0px 48px 0px color.scale(c.$shadow-color, $alpha: -75%);
