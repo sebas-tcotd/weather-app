@@ -1,12 +1,20 @@
 <main class="g-weather-info o-container">
-  <div class="g-weather-info__info">
-    <span class="g-weather-info__temperature">28 °C</span>
-    <div class="g-weather-info__data">
-      Lima, PE
-      <div class="a-separator a-separator--vertical"></div>
-      Cielo claro
-    </div>
+  <div class="g-weather-info__info" *ngIf="!(vm$ | async)?.id; else weather">
+    <span class="g-weather-info__temperature">Hola</span>
   </div>
+
+  <ng-template #weather>
+    <div class="g-weather-info__info">
+      <span class="g-weather-info__temperature"
+        >{{ (vm$ | async)?.main?.temp | number: "1.0-0" }} °C</span
+      >
+      <div class="g-weather-info__data">
+        {{ (vm$ | async)?.name }}, {{ (vm$ | async)?.sys?.country }}
+        <div class="a-separator a-separator--vertical"></div>
+        <!-- {{ (vm$ | async)!.weather[0].description | titlecase }} -->
+      </div>
+    </div>
+  </ng-template>
 
   <div class="g-weather-info__details">
     <app-search-or-input

@@ -3,8 +3,6 @@ import {
   Component,
   Input,
   OnChanges,
-  OnInit,
-  QueryList,
   SimpleChanges,
   ViewChild,
   ViewContainerRef,
