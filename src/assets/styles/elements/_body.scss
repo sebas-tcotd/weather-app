@@ -2,6 +2,10 @@
 
 body {
   background-color: settings.$background-default;
+  background-image: url("../../../assets/img/cloudy-blurred.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
   color: settings.$text-color;
   font-family: settings.$font-family;
   letter-spacing: 0.5px;

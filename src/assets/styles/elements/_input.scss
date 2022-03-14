@@ -13,9 +13,19 @@ input {
   &:focus {
     background: color.scale(colors.$input-background-color, $lightness: -25%);
     outline: none;
+    transition: all 0.5s ease;
   }
 
   &::placeholder {
     color: colors.$text-color-desactivated;
+  }
+
+  &[type="search"]::-webkit-search-cancel-button {
+    appearance: none;
+
+    width: 18px;
+    height: 18px;
+    background-image: url("../../../assets/icons/icon-clear.svg");
+    transition: all 0.25s ease;
   }
 }

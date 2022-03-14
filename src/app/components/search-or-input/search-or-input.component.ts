@@ -39,7 +39,7 @@ export class SearchOrInputComponent implements OnChanges, AfterViewInit {
   }
 
   private loadDynamicComponent(type: ComponentType) {
-    let component: typeof MoreDetailsComponent;
+    let component;
 
     switch (type) {
       case ComponentType.MoreDetails:
