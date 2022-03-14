@@ -6,3 +6,13 @@
 
 /* OBJECTS */
 @use "./assets/styles/objects/objects";
+
+/* ATOMIC DESIGN */
+/* Atoms */
+@use "./assets/styles/components/atoms/atoms";
+
+/* Molecules */
+@use "./assets/styles/components/molecules/molecules";
+
+/* Organisms */
+@use "./assets/styles/components/organisms/organisms";

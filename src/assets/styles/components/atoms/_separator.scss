@@ -1,0 +1,11 @@
+@use "../../settings/colors";
+
+.a-separator {
+  width: 12px;
+  height: 0px;
+  border: 1px solid colors.$border-color;
+
+  &--vertical {
+    transform: rotate(90deg);
+  }
+}

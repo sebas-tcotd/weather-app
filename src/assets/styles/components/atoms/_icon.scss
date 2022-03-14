@@ -1,0 +1,6 @@
+@use "../../settings/colors";
+
+.a-icon {
+  color: colors.$text-color;
+  fill: colors.$text-color;
+}

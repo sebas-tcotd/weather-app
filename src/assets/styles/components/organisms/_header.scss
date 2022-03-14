@@ -1,0 +1,12 @@
+@use "../../settings/sizing";
+@use "../../settings/typography" as type;
+
+.g-header {
+  height: sizing.$header-height;
+  display: flex;
+  align-items: center;
+
+  &__logo {
+    font-size: type.$fs-h6;
+  }
+}

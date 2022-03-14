@@ -1,0 +1,20 @@
+<main class="g-weather-info o-container">
+  <div class="g-weather-info__info">
+    <span class="g-weather-info__temperature">28 °C</span>
+    <div class="g-weather-info__data">
+      Lima, PE
+      <div class="a-separator a-separator--vertical"></div>
+      Cielo claro
+    </div>
+  </div>
+
+  <div class="g-weather-info__details">
+    <app-search-or-input
+      class="a-input"
+      [component]="type"
+    ></app-search-or-input>
+    <button class="a-button" (click)="toggleComponent()">
+      <img src="../../../assets/icons/icon-search.svg" alt="icon search" />
+    </button>
+  </div>
+</main>

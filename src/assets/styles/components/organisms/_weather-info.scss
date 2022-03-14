@@ -1,0 +1,32 @@
+@use "../../settings/sizing";
+@use "../../settings/typography" as type;
+
+.g-weather-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  min-height: calc(100vh - (sizing.$header-height + sizing.$size-24));
+
+  &__info {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__temperature {
+    font-size: type.$fs-h1;
+    font-weight: 800;
+    line-height: 90px;
+  }
+
+  &__data {
+    display: flex;
+    align-items: center;
+    gap: sizing.$size-8;
+    line-height: 30px;
+  }
+
+  &__details {
+    display: flex;
+    justify-content: space-between;
+  }
+}

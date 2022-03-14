@@ -1,0 +1,21 @@
+@use "sass:color";
+@use "../settings/colors";
+@use "../settings/sizing";
+
+input {
+  padding: 0 sizing.$size-16;
+  border: none;
+  background-color: colors.$input-background-color;
+  color: colors.$text-color;
+  min-height: sizing.$size-48;
+  width: 100%;
+
+  &:focus {
+    background: color.scale(colors.$input-background-color, $lightness: -25%);
+    outline: none;
+  }
+
+  &::placeholder {
+    color: colors.$text-color-desactivated;
+  }
+}
