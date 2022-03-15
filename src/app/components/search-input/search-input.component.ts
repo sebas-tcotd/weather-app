@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { tap } from 'rxjs/operators';
 import { SearchService } from 'src/app/services/search.service';
 import { WeatherService } from 'src/app/services/weather.service';
 
@@ -24,6 +25,7 @@ export class SearchInputComponent implements OnInit, OnDestroy {
   searchWeather(city: string) {
     this.weatherService
       .getWeatherByCity(city)
-      ?.subscribe((res) => this.weatherService.setWeather(res));
+      ?.pipe(tap((res) => this.weatherService.setWeatherType(res.main.temp)))
+      .subscribe((res) => this.weatherService.setWeather(res));
   }
 }

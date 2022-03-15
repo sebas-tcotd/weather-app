@@ -1,6 +1,12 @@
-import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  OnDestroy,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
-import { first, last } from 'rxjs/operators';
+import { last, tap, first } from 'rxjs/operators';
 import { ComponentType } from 'src/app/constants/componentType';
 import { WeatherResponse } from 'src/app/models/weather';
 import { SearchService } from 'src/app/services/search.service';
@@ -11,6 +17,7 @@ import { WeatherService } from 'src/app/services/weather.service';
   templateUrl: './home.component.html',
 })
 export class HomeComponent implements OnInit, OnDestroy {
+  @Output() weatherTypeEmitter = new EventEmitter();
   private searchSubscription!: Subscription;
   public type = ComponentType.MoreDetails;
   public searchWord: string = '';
@@ -44,15 +51,14 @@ export class HomeComponent implements OnInit, OnDestroy {
 
     if (!this.vm$.pipe(last())) return;
 
-    if (this.type === ComponentType.SearchInput)
-      return (this.type = ComponentType.MoreDetails);
-
-    return this.search();
+    if (this.type === ComponentType.SearchInput) this.search();
+    return (this.type = ComponentType.MoreDetails);
   }
 
   search() {
-    console.log('a');
-
-    this.vm$ = this.weatherService.getWeatherByCity(this.searchWord)!;
+    this.vm$ = this.weatherService.getWeatherByCity(this.searchWord)?.pipe(
+      first(),
+      tap((res) => this.weatherService.setWeatherType(res.main.temp)),
+    )!;
   }
 }

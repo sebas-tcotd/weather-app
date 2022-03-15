@@ -1,0 +1,47 @@
+@use "../../tools/background-image" as bkg;
+@use "../../settings/settings";
+.a-weather-image {
+  background: linear-gradient(
+    45deg,
+    settings.$background-default 0%,
+    rgba(66, 110, 129, 1) 100%
+  );
+
+  &--snowy {
+    @include bkg.background-image(
+      $image-url: "../../../../assets/img/snowy.png"
+    );
+  }
+
+  &--mug {
+    @include bkg.background-image($image-url: "../../../../assets/img/mug.png");
+  }
+
+  &--sunny {
+    @include bkg.background-image(
+      $image-url: "../../../../assets/img/sunny.png"
+    );
+  }
+
+  &--cloudy {
+    @include bkg.background-image(
+      $image-url: "../../../../assets/img/cloudy.png"
+    );
+  }
+
+  &--rainy {
+    @include bkg.background-image(
+      $image-url: "../../../../assets/img/rainy.png"
+    );
+  }
+
+  &--stormy {
+    @include bkg.background-image(
+      $image-url: "../../../../assets/img/stormy.png"
+    );
+  }
+
+  &--hot {
+    @include bkg.background-image($image-url: "../../../../assets/img/hot.png");
+  }
+}

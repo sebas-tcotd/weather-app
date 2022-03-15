@@ -1,5 +1,6 @@
 @use "../../settings/sizing";
 @use "../../settings/typography" as type;
+@use "../../tools/background-image" as bkg;
 
 .g-weather-info {
   display: flex;

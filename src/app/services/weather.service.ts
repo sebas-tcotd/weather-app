@@ -15,10 +15,17 @@ export class WeatherService {
     new BehaviorSubject({} as WeatherResponse);
   public weather$ = this.weatherSubject.asObservable();
 
+  private weatherType: Subject<number> = new Subject();
+  public weatherType$ = this.weatherType.asObservable();
+
   constructor(private http: HttpClient) {}
 
   public setWeather(weather: WeatherResponse) {
     this.weatherSubject.next(weather);
+  }
+
+  public setWeatherType(type: number) {
+    this.weatherType.next(type);
   }
 
   public getWeatherByCity(city: string) {
