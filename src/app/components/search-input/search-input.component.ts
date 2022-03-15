@@ -5,7 +5,6 @@ import { WeatherService } from 'src/app/services/weather.service';
 @Component({
   selector: 'app-search-input',
   templateUrl: './search-input.component.html',
-  styleUrls: ['./search-input.component.scss'],
 })
 export class SearchInputComponent implements OnInit, OnDestroy {
   constructor(
@@ -24,7 +23,7 @@ export class SearchInputComponent implements OnInit, OnDestroy {
 
   searchWeather(city: string) {
     this.weatherService
-      .searchWeather(city)
+      .getWeatherByCity(city)
       ?.subscribe((res) => this.weatherService.setWeather(res));
   }
 }

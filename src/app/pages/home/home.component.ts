@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { first, last } from 'rxjs/operators';
 import { ComponentType } from 'src/app/constants/componentType';
@@ -15,6 +15,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   public type = ComponentType.MoreDetails;
   public searchWord: string = '';
   public vm$!: Observable<WeatherResponse>;
+  public geoPosition!: GeolocationCoordinates;
 
   constructor(
     private searchService: SearchService,
@@ -25,12 +26,16 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.searchSubscription = this.searchService.search$.subscribe(
       (word) => (this.searchWord = word)
     );
+
     this.vm$ = this.weatherService.weather$;
-    console.log(this.vm$);
   }
 
   ngOnDestroy(): void {
     this.searchSubscription.unsubscribe();
+  }
+
+  async getPosition() {
+    this.geoPosition = await this.weatherService.getGeoposition();
   }
 
   toggleComponent() {
@@ -46,6 +51,8 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   search() {
-    this.vm$ = this.weatherService.searchWeather(this.searchWord)!;
+    console.log('a');
+
+    this.vm$ = this.weatherService.getWeatherByCity(this.searchWord)!;
   }
 }

@@ -1,6 +1,9 @@
 <main class="g-weather-info o-container">
-  <div class="g-weather-info__info" *ngIf="!(vm$ | async)?.id; else weather">
+  <div class="g-weather-info__info" *ngIf="(vm$ | async)?.cod !== 200; else weather">
     <span class="g-weather-info__temperature">Hola</span>
+    <div class="g-weather-info__data">
+      Busque una ciudad para conocer su clima.
+    </div>
   </div>
 
   <ng-template #weather>
@@ -11,7 +14,7 @@
       <div class="g-weather-info__data">
         {{ (vm$ | async)?.name }}, {{ (vm$ | async)?.sys?.country }}
         <div class="a-separator a-separator--vertical"></div>
-        <!-- {{ (vm$ | async)!.weather[0].description | titlecase }} -->
+        {{ (vm$ | async)!.weather[0].description | titlecase }}
       </div>
     </div>
   </ng-template>

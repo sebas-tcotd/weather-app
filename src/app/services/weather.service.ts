@@ -21,7 +21,7 @@ export class WeatherService {
     this.weatherSubject.next(weather);
   }
 
-  public searchWeather(city: string) {
+  public getWeatherByCity(city: string) {
     city = city.trim();
     if (!city) return;
 
@@ -32,5 +32,24 @@ export class WeatherService {
       .set('units', 'metric');
 
     return this.http.get<WeatherResponse>(`${this.apiUrl}weather`, { params });
+  }
+
+  public getWeatherByPosition(position: GeolocationCoordinates) {
+    const params = new HttpParams()
+      .set('lat', position.latitude)
+      .set('lon', position.longitude)
+      .set('appid', this.apiKey)
+      .set('lang', 'es')
+      .set('units', 'metric');
+
+    return this.http.get<WeatherResponse>(`${this.apiUrl}weather`, { params });
+  }
+
+  public getGeoposition(): Promise<GeolocationCoordinates> {
+    return new Promise((resolve) =>
+      navigator.geolocation.getCurrentPosition((position) =>
+        resolve(position.coords)
+      )
+    );
   }
 }

@@ -13,8 +13,7 @@ import { SearchInputComponent } from '../search-input/search-input.component';
 
 @Component({
   selector: 'app-search-or-input',
-  templateUrl: './search-or-input.component.html',
-  styleUrls: ['./search-or-input.component.scss'],
+  template: '<ng-template #dynamic></ng-template>'
 })
 export class SearchOrInputComponent implements OnChanges, AfterViewInit {
   @Input() component!: ComponentType;
