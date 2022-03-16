@@ -1,29 +1,29 @@
 <main class="g-weather-info o-container">
-  <!-- <div class="g-weather-info__info">
-    <span class="g-weather-info__temperature">Hola</span>
+  <div
+    class="g-weather-info__info"
+    *ngIf="weather$ | async as weather; else landing"
+  >
+    <span class="g-weather-info__temperature"
+      >{{ weather.temperature | number: "1.0-0" }} °C
+    </span>
     <div class="g-weather-info__data">
-      Busque una ciudad para conocer su clima.
-    </div>
-  </div> -->
-
-  <div #weather>
-    <div class="g-weather-info__info">
-      <span class="g-weather-info__temperature"
-        >{{ (weather$ | async)!.temperature | number: "1.0-0" }} °C
-      </span>
-      <div class="g-weather-info__data">
-        {{ (weather$ | async)?.city }}, {{ (weather$ | async)?.country }}
-        <div class="a-separator a-separator--vertical"></div>
-        {{ (weather$ | async)?.description | titlecase }}
-      </div>
+      {{ weather.city }}, {{ weather.country }}
+      <div class="a-separator a-separator--vertical"></div>
+      {{ weather.description | titlecase }}
     </div>
   </div>
 
+  <ng-template #landing>
+    <div class="g-weather-info__info">
+      <span class="g-weather-info__temperature">Hola</span>
+      <div class="g-weather-info__data">
+        Busque una ciudad para conocer su clima.
+      </div>
+    </div>
+  </ng-template>
+
   <div class="g-weather-info__details">
-    <app-search-or-input
-      class="a-input"
-      [component]="type"
-    ></app-search-or-input>
+    <app-search-or-input class="a-input"></app-search-or-input>
     <button class="a-button" (click)="toggleComponent()">
       <img src="../../../assets/icons/icon-search.svg" alt="icon search" />
     </button>
