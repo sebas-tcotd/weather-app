@@ -1,8 +1,9 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, of, Subject } from 'rxjs';
+import { map, Observable, of } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { WeatherResponse } from '../models/weather';
+import { WeatherResponse } from '../interfaces/weather-response.interface';
+import { Weather } from '../models/weather.model';
 
 @Injectable({
   providedIn: 'root',
@@ -11,26 +12,11 @@ export class WeatherService {
   private apiUrl: string = environment.apiURL;
   private apiKey: string = environment.apiKey;
 
-  private weatherSubject: BehaviorSubject<WeatherResponse> =
-    new BehaviorSubject({} as WeatherResponse);
-  public weather$ = this.weatherSubject.asObservable();
-
-  private weatherType: Subject<number> = new Subject();
-  public weatherType$ = this.weatherType.asObservable();
-
   constructor(private http: HttpClient) {}
-
-  public setWeather(weather: WeatherResponse) {
-    this.weatherSubject.next(weather);
-  }
-
-  public setWeatherType(type: number) {
-    this.weatherType.next(type);
-  }
 
   public getWeatherByCity(city: string) {
     city = city.trim();
-    if (!city) return;
+    if (!city) return of();
 
     const params = new HttpParams()
       .set('q', city)
@@ -38,7 +24,19 @@ export class WeatherService {
       .set('lang', 'es')
       .set('units', 'metric');
 
-    return this.http.get<WeatherResponse>(`${this.apiUrl}weather`, { params });
+    return this.http
+      .get<WeatherResponse>(`${this.apiUrl}weather`, { params })
+      .pipe(
+        map(
+          (res) =>
+            new Weather(
+              res.main.temp,
+              res.name,
+              res.sys.country,
+              res.weather[0].description
+            )
+        )
+      );
   }
 
   public getWeatherByPosition(position: GeolocationCoordinates) {

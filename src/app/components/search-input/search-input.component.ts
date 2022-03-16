@@ -1,31 +1,25 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { tap } from 'rxjs/operators';
-import { SearchService } from 'src/app/services/search.service';
-import { WeatherService } from 'src/app/services/weather.service';
+import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { loadWeather, performSearch, resetSearch } from 'src/app/store/actions';
+import { AppState } from 'src/app/store/app.reducer';
 
 @Component({
   selector: 'app-search-input',
   templateUrl: './search-input.component.html',
 })
-export class SearchInputComponent implements OnInit, OnDestroy {
-  constructor(
-    private searchService: SearchService,
-    private weatherService: WeatherService
-  ) {}
+export class SearchInputComponent implements OnInit {
+  search$!: Observable<string>;
+
+  constructor(private store: Store<AppState>) {}
 
   ngOnInit(): void {}
-  ngOnDestroy() {
-    this.searchService.setSearchWord('');
-  }
 
   emitSearchWord(word: string) {
-    this.searchService.setSearchWord(word);
+    this.store.dispatch(performSearch({ searchWord: word }));
   }
 
   searchWeather(city: string) {
-    this.weatherService
-      .getWeatherByCity(city)
-      ?.pipe(tap((res) => this.weatherService.setWeatherType(res.main.temp)))
-      .subscribe((res) => this.weatherService.setWeather(res));
+    this.store.dispatch(loadWeather({ payload: city }));
   }
 }

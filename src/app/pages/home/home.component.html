@@ -1,23 +1,23 @@
 <main class="g-weather-info o-container">
-  <div class="g-weather-info__info" *ngIf="(vm$ | async)?.cod !== 200; else weather">
+  <!-- <div class="g-weather-info__info">
     <span class="g-weather-info__temperature">Hola</span>
     <div class="g-weather-info__data">
       Busque una ciudad para conocer su clima.
     </div>
-  </div>
+  </div> -->
 
-  <ng-template #weather>
+  <div #weather>
     <div class="g-weather-info__info">
       <span class="g-weather-info__temperature"
-        >{{ (vm$ | async)?.main?.temp | number: "1.0-0" }} °C</span
-      >
+        >{{ (weather$ | async)!.temperature | number: "1.0-0" }} °C
+      </span>
       <div class="g-weather-info__data">
-        {{ (vm$ | async)?.name }}, {{ (vm$ | async)?.sys?.country }}
+        {{ (weather$ | async)?.city }}, {{ (weather$ | async)?.country }}
         <div class="a-separator a-separator--vertical"></div>
-        {{ (vm$ | async)!.weather[0].description | titlecase }}
+        {{ (weather$ | async)?.description | titlecase }}
       </div>
     </div>
-  </ng-template>
+  </div>
 
   <div class="g-weather-info__details">
     <app-search-or-input
