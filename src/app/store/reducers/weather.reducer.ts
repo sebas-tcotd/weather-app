@@ -7,6 +7,7 @@ export interface WeatherState {
   city: string;
   country: string;
   description: string;
+  pristine: boolean;
 }
 
 const weatherInitialState: WeatherState = {
@@ -14,6 +15,7 @@ const weatherInitialState: WeatherState = {
   city: '',
   country: '',
   description: '',
+  pristine: true,
 };
 
 export const weatherReducer = createReducer(
@@ -24,5 +26,6 @@ export const weatherReducer = createReducer(
     city: weather.city,
     country: weather.country,
     description: weather.description,
+    pristine: false,
   }))
 );

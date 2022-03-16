@@ -33,7 +33,8 @@ export class WeatherService {
               res.main.temp,
               res.name,
               res.sys.country,
-              res.weather[0].description
+              res.weather[0].description,
+              false
             )
         )
       );

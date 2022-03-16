@@ -1,26 +1,25 @@
 <main class="g-weather-info o-container">
-  <div
-    class="g-weather-info__info"
-    *ngIf="weather$ | async as weather; else landing"
-  >
-    <span class="g-weather-info__temperature"
-      >{{ weather.temperature | number: "1.0-0" }} °C
-    </span>
-    <div class="g-weather-info__data">
-      {{ weather.city }}, {{ weather.country }}
-      <div class="a-separator a-separator--vertical"></div>
-      {{ weather.description | titlecase }}
-    </div>
-  </div>
-
-  <ng-template #landing>
-    <div class="g-weather-info__info">
-      <span class="g-weather-info__temperature">Hola</span>
+  <ng-container *ngrxLet="weather$ as weather">
+    <div class="g-weather-info__info" *ngIf="!weather.pristine; else landing">
+      <span class="g-weather-info__temperature"
+        >{{ weather.temperature | number: "1.0-0" }} °C
+      </span>
       <div class="g-weather-info__data">
-        Busque una ciudad para conocer su clima.
+        {{ weather.city }}, {{ weather.country }}
+        <div class="a-separator a-separator--vertical"></div>
+        {{ weather.description | titlecase }}
       </div>
     </div>
-  </ng-template>
+
+    <ng-template #landing>
+      <div class="g-weather-info__info">
+        <span class="g-weather-info__temperature">Hola</span>
+        <div class="g-weather-info__data">
+          Busque una ciudad para conocer su clima.
+        </div>
+      </div>
+    </ng-template>
+  </ng-container>
 
   <div class="g-weather-info__details">
     <app-search-or-input class="a-input"></app-search-or-input>
