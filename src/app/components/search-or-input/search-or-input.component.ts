@@ -1,4 +1,5 @@
 import {
+  AfterViewChecked,
   AfterViewInit,
   Component,
   Input,
@@ -19,33 +20,22 @@ import { SearchInputComponent } from '../search-input/search-input.component';
 
 @Component({
   selector: 'app-search-or-input',
-  template: '<ng-template #dynamic></ng-template>',
+  template: '<ng-template #vrf></ng-template>',
 })
-export class SearchOrInputComponent
-  implements OnInit, OnChanges, AfterViewInit
-{
-  @Input() component!: ComponentType;
-  @ViewChild('dynamic', { read: ViewContainerRef })
-  vrf!: ViewContainerRef;
-  component$!: Observable<any>;
+export class SearchOrInputComponent implements OnInit, AfterViewInit {
+  @ViewChild('vrf', { read: ViewContainerRef })
+  private vrf!: ViewContainerRef;
 
   constructor(private store: Store<AppState>) {}
 
-  ngOnInit(): void {
-    this.component$ = this.store.select(bottomBarSelector);
-  }
+  ngOnInit(): void {}
 
   ngAfterViewInit(): void {
     this.vrf.createComponent(MoreDetailsComponent);
-  }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    if (
-      changes['component'].currentValue !== undefined &&
-      this.vrf !== undefined
-    ) {
-      this.loadDynamicComponent(changes['component'].currentValue);
-    }
+    this.store.select(bottomBarSelector).subscribe((component) => {
+      if (this.vrf !== undefined) this.loadDynamicComponent(component);
+    });
   }
 
   private loadDynamicComponent(type: ComponentType) {
@@ -53,12 +43,10 @@ export class SearchOrInputComponent
 
     switch (type) {
       case ComponentType.MoreDetails:
-        this.store.dispatch(toggleToDetails());
         component = MoreDetailsComponent;
         break;
 
       case ComponentType.SearchInput:
-        this.store.dispatch(toggleToSearch());
         component = SearchInputComponent;
         break;
     }
