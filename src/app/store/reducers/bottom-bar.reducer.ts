@@ -7,7 +7,7 @@ export interface BottomBarState {
 }
 
 const bottomBarInitialState: BottomBarState = {
-  component: ComponentType.MoreDetails,
+  component: ComponentType.SearchInput,
 };
 
 export const BottomBarReducer = createReducer(
