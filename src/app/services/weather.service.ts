@@ -2,6 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable, of } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { WeatherGroups } from '../constants/weatherGroups';
 import { WeatherResponse } from '../interfaces/weather-response.interface';
 import { Weather } from '../models/weather.model';
 
@@ -34,6 +35,7 @@ export class WeatherService {
               res.name,
               res.sys.country,
               res.weather[0].description,
+              this.setWeatherCategory(res.weather[0].id),
               false
             )
         )
@@ -57,5 +59,13 @@ export class WeatherService {
         resolve(position.coords)
       )
     );
+  }
+
+  private setWeatherCategory(weatherId: number) {
+    if (weatherId < 800) return parseInt(weatherId.toString().slice(0, 1));
+
+    if (weatherId === 800) return WeatherGroups.clear;
+
+    return WeatherGroups.clouds;
   }
 }

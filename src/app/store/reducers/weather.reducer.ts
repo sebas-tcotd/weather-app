@@ -1,9 +1,11 @@
 import { createReducer, on } from '@ngrx/store';
+import { WeatherGroups } from 'src/app/constants/weatherGroups';
 import { Weather } from 'src/app/models/weather.model';
 import { loadWeatherSuccessful } from '../actions';
 
 export interface WeatherState {
   temperature: number;
+  category: WeatherGroups;
   city: string;
   country: string;
   description: string;
@@ -12,6 +14,7 @@ export interface WeatherState {
 
 const weatherInitialState: WeatherState = {
   temperature: NaN,
+  category: WeatherGroups.none,
   city: '',
   country: '',
   description: '',
@@ -26,6 +29,7 @@ export const weatherReducer = createReducer(
     city: weather.city,
     country: weather.country,
     description: weather.description,
+    category: weather.category,
     pristine: false,
   }))
 );
